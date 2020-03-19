@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Formulaire</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap/dist/css/bootstrap.css">
+	<style type="text/css">
+		label{
+			width: 100px;
+			float: left;;
+			padding-top: 20px;
+		}
+		.form-control {
+			width: 350px;
+			padding: 12px 20px;
+			margin: 8px 0;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			display: inline-block; 
+		}
+		output {
+			height: 30px;
+			display: block;
+			padding-top: 20px
+		}
+		.btn {
+			width: 100%;
+			background-color: #4CAF50;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+		.btn:hover {
+			background-color: #45a049; 
+		}
+		fieldset {
+			border-radius: 5px;
+			background-color: #f2f2f2;
+			padding: 20px;
+			border: 1px solid lightgray;
+			width: 450px;
+			margin: auto;
+		}
+	</style>
+</head>
+<body>
+	<form>
+		<fieldset>
+			<legend>Shopping Cart</legend>
+			<div class="form-group">
+				<label>Prix Unitaire</label>
+				<input type="number" name="" class="form-control prc">
+			</div>
+			<div class="form-group">
+				<label>Quantité</label>
+				<input type="number" name="" class="form-control prc">
+			</div>
+			<div>
+				<label>Montant Brut</label>
+				<output id="brut" class="fin"></output>
+			</div>
+			<div class="form-group">
+				<label>Taux TVA</label>
+				<input type="number" name="" class="form-control price">
+			</div>
+			<div>
+				<label>Montant TVA</label>
+				<output id="tva" class="fin"></output>
+			</div>
+			<div>
+				<label>Total</label>
+				<output id="result"></output>
+			</div>
+		</fieldset>
+	</form>
+	<script type="text/javascript" src="jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript">
+		var tauxTVA = 0; var montantTVA = 0; var totalBr = 1;var totalAPayer = 0;
+		$('.form-group').on('input', '.prc', function(){
+			var totalBrut = 1;
+			$('.form-group .prc').each(function(){
+				var inputVal = $(this).val();
+				if($.isNumeric(inputVal)){
+					totalBrut *= parseFloat(inputVal);
+				}
+			});
+			totalAPayer = totalBrut;
+			$('#brut').text(totalBrut);
+			$('#result').text(totalSum);
+		})
+		$('.form-group').on('input', '.price', function(){
+			if($.isNumeric($('.form-group .price').val())){
+				montantTVA = parseFloat($('.form-group .price').val());
+			}
+			tauxTVA = (totalAPayer*montantTVA)/100
+			$('#tva').text(tauxTVA);
+			$('#result').text(tauxTVA + totalAPayer);
+		});
+	</script>
+</body>
+</html>
